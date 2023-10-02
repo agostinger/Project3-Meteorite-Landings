@@ -1,51 +1,36 @@
-/* General resets for consistent styling */
-* {
+/* Apply general styles to your page */
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
+  }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f8f8;
-    color: #555;
-    font-size: 16px;
-    line-height: 1.7;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
+  .content {
+    display: flex; /* Use flexbox to arrange containers */
+  }
 
-.content {
-    width: 90vw; /* takes up 90% of the viewport width */
-    max-width: 1300px;
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
+  #map-container {
+    flex: 1; /* Let the map container expand to fill available space */
+    height: 500px; /* Set the map container height as needed */
+  }
 
-#map-container {
-    width: 100%;
-    height: 500px;
-    margin-bottom: 25px;
-    border-radius: 6px;
-    overflow: hidden; /* in case the map has any outside elements or overflowing content */
-}
+  #other-visualization-container {
+    flex: 1; /* Let the other visualization container expand to fill available space */
+    height: 500px; /* Set the height as needed */
+  }
+  /* Set Legend Style */
+  .legend {
+    padding: 6px 8px;
+    font-size: 14px;
+    background: black;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  }
 
-#other-visualization-container {
-    width: 100%;
-}
-
-/* Placeholder styling in case you want to add more content within the other-visualization-container */
-#other-visualization-container > * {
-    margin-bottom: 20px; /* Spacing between children elements */
-}
-
-/* Last child margin reset to prevent extra spacing at the bottom */
-#other-visualization-container > *:last-child {
-    margin-bottom: 0;
-}
-
-}
+  .legend i {
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+  }

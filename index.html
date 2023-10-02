@@ -20,10 +20,21 @@
 
   <div class="content">
     <div id="map-container">
-        <!-- Your Leaflet map will be inserted here -->
+    <!-- Leaflet map inserted here -->
     </div>
-    <div id="other-visualization-container">
+    <div id="bar">
         <!-- Other visualizations go here -->
+    </div>
+    <div>
+      <select id="meteoroidSelect">
+        <option value="">Select a Meteoroid</option>
+      </select>
+    </div>
+    <div id="meteoroidDetails">
+      <strong>Name: </strong><span id="name"></span><br>
+      <strong>Year: </strong><span id="year"></span><br>
+      <strong>Mass: </strong><span id="mass"></span> grams<br>
+      <strong>Recclass: </strong><span id="type"></span><br>
     </div>
 
 <!-- Include Plotly from CDN -->
@@ -34,6 +45,7 @@
     crossorigin=""></script>
   <!-- D3 JavaScript -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <!-- Our JavaScript -->
   <script type="text/javascript" src="static/js/logic.js"></script>
 </body>
