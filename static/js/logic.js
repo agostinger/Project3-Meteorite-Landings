@@ -150,36 +150,36 @@ createLegend(map);
 }
 // Create the horizontal bar chart
 function createBarChart(data) {
-  // Extract the top ten meteorites by mass
-  const topTenMeteorites = data
-    .sort((a, b) => parseFloat(b[12]) - parseFloat(a[12]))
-    .slice(0, 10);
+    // Extract the top ten meteorites by mass
+    const topTenMeteorites = data
+        .sort((a, b) => parseFloat(b[12]) - parseFloat(a[12]))
+        .slice(0, 10);
 
-  // Extract names and masses for the bar chart
-  const meteoriteNames = topTenMeteorites.map((feature) => feature[8]);
-  const meteoriteMasses = topTenMeteorites.map((feature) => parseFloat(feature[12]));
+    // Extract names and masses for the bar chart
+    const meteoriteNames = topTenMeteorites.map((feature) => feature[8]);
+    const meteoriteMasses = topTenMeteorites.map((feature) => parseFloat(feature[12]));
 
-  // Create data for the horizontal bar chart
-  const barChartData = [
-    {
-      x: meteoriteMasses.reverse(),
-      y: meteoriteNames,
-      type: "bar",
-      orientation: "h",
-      marker: {
-      color: "rgb(255, 165, 0)", // Bar fill color
-      },
-    },
-  ];
+    // Create data for the horizontal bar chart
+    const barChartData = [
+        {
+            x: meteoriteMasses.reverse(),
+            y: meteoriteNames,
+            type: "bar",
+            orientation: "h",
+            marker: {
+                color: "rgb(255, 165, 0)", // Bar fill color
+            },
+        },
+    ];
 
-  const layout = {
-    title: "Top Ten Meteorites by Mass",
-    xaxis: {
-      title: "Mass (grams)",
-      rangemode: "tozero",
-    },
-  };
+    const layout = {
+        title: "Top Ten Meteorites by Mass",
+        xaxis: {
+            title: "Mass (grams)",
+            rangemode: "tozero",
+        },
+    };
 
-  // Create the horizontal bar chart using Plotly
-  Plotly.newPlot("bar", barChartData, layout);
+    // Create the horizontal bar chart using Plotly
+    Plotly.newPlot("bar", barChartData, layout);
 }
