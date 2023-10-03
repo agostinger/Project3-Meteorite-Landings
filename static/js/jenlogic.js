@@ -50,7 +50,7 @@ function getYearRange(year) {
     return "Unknown"; // Handle cases outside of defined ranges
   }
 }
-d3.json('/getdata').then((data) => {
+d3.json(link).then((data) => {
   console.log(data);
   // Filter out data points with null latitude or longitude
   let validData = data.data.filter((feature) => {
@@ -183,7 +183,6 @@ function createBarChart(data) {
     // Create the horizontal bar chart using Plotly
     Plotly.newPlot("bar", barChartData, layout);
 }
-
 
 // Star Background
 
