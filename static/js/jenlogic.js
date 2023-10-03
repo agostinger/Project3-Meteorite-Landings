@@ -184,7 +184,6 @@ function createBarChart(data) {
     Plotly.newPlot("bar", barChartData, layout);
 }
 
-
 // Star Background
 
 (function () {
