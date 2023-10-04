@@ -1,34 +1,34 @@
-// Fetch JSON data and create markers
 const link = "https://data.nasa.gov/api/views/gh4g-9sfh/rows.json?accessType=DOWNLOAD";
 
-// Define functions for setting marker size based on meteroite size
-let setSize = (mass) => mass / 500;
+const setSize = mass => mass / 500;
+
 const colorScale = d3.scaleOrdinal()
-  .domain(["1800-1900", "1901-2000", "2001-2100"]) // Define year range categories
-  .range(["#ff0000", "#00ff00", "#0000ff"]); // Define corresponding colors
+  .domain(["1800-1900", "1901-2000", "2001-2100"])
+  .range(["#ff0000", "#00ff00", "#0000ff"]);
 
-let createMarker = (feature) => {
-  // Extract and parse latitude and longitude values
-  let latitude = parseFloat(feature[15]);
-  let longitude = parseFloat(feature[16]);
+const getYearRange = year => {
+  if (year >= 1800 && year <= 1900) return "1800-1900";
+  if (year >= 1901 && year <= 2000) return "1901-2000";
+  if (year >= 2001 && year <= 2100) return "2001-2100";
+  return "Unknown";
+};
 
-  // Check if latitude and longitude are valid numbers
+const createMarker = feature => {
+  const latitude = parseFloat(feature[15]);
+  const longitude = parseFloat(feature[16]);
+
   if (isNaN(latitude) || isNaN(longitude)) {
     console.error("Invalid latitude or longitude:", feature[15], feature[16]);
-    return null; // Return null to skip creating a marker for invalid data
+    return null;
   }
-  // Extract the date or year information from your data
-  let date = new Date(feature[14]); // Replace "date" with the actual property name
-  let year = date.getFullYear();
 
-  // Determine the year range based on the year value
-  let yearRange = getYearRange(year); // Implement a function to categorize years into ranges
+  const date = new Date(feature[14]);
+  const year = date.getFullYear();
+  const yearRange = getYearRange(year);
+  const fillColor = colorScale(yearRange);
 
-  // Use the color scale to determine the fill color based on the year range
-  let fillColor = colorScale(yearRange);
-  // Extract other relevant properties for the popup content
-  let name = feature[8];
-  let mass = feature[12];
+  const name = feature[8];
+  const mass = feature[12];
 
   return L.circle([latitude, longitude], {
     color: "black",
@@ -37,60 +37,36 @@ let createMarker = (feature) => {
     opacity: 1,
     weight: 1,
     fillOpacity: 0.5,
-  }).bindPopup(`<strong>Name: </strong> ${name}<br><strong>Mass: </strong> ${mass} grams<br><strong>Year: </strong> ${year} `);
+  }).bindPopup(`<strong>Name: </strong> ${name}<br><strong>Mass: </strong> ${mass} grams<br><strong>Year: </strong> ${year}`);
 };
-function getYearRange(year) {
-  if (year >= 1800 && year <= 1900) {
-    return "1800-1900";
-  } else if (year >= 1901 && year <= 2000) {
-    return "1901-2000";
-  } else if (year >= 2001 && year <= 2100) {
-    return "2001-2100";
-  } else {
-    return "Unknown"; // Handle cases outside of defined ranges
-  }
-}
-d3.json('/getdata').then((data) => {
-  console.log(data);
-  // Filter out data points with null latitude or longitude
-  let validData = data.data.filter((feature) => {
-    let latitude = parseFloat(feature[15]);
-    let longitude = parseFloat(feature[16]);
+
+d3.json(link).then(data => {
+  const validData = data.data.filter(feature => {
+    const latitude = parseFloat(feature[15]);
+    const longitude = parseFloat(feature[16]);
     return !isNaN(latitude) && !isNaN(longitude);
   });
-  let markers = validData.map(createMarker);
+
+  const markers = validData.map(createMarker);
   createMap(markers);
 
-  // Create the dropdown options
   const meteoroidSelect = document.getElementById("meteoroidSelect");
-  validData.forEach((feature) => {
-    const name = feature[8];
+  validData.forEach(feature => {
     const option = document.createElement("option");
-    option.value = name;
-    option.textContent = name;
+    option.value = feature[8];
+    option.textContent = feature[8];
     meteoroidSelect.appendChild(option);
   });
 
-  // Add an event listener to the dropdown to update details when an option is selected
   meteoroidSelect.addEventListener("change", () => {
-    const selectedName = meteoroidSelect.value;
-    const selectedMeteoroid = validData.find((feature) => feature[8] === selectedName);
+    const selectedMeteoroid = validData.find(feature => feature[8] === meteoroidSelect.value);
 
-    if (selectedMeteoroid) {
-      // Update the details
-      document.getElementById("name").textContent = selectedName;
-      document.getElementById("year").textContent = selectedMeteoroid[14];
-      document.getElementById("mass").textContent = selectedMeteoroid[12];
-      document.getElementById("type").textContent = selectedMeteoroid[11];
-    } else {
-      // Clear the details if no option is selected
-      document.getElementById("name").textContent = "";
-      document.getElementById("year").textContent = "";
-      document.getElementById("mass").textContent = "";
-    }
+    document.getElementById("name").textContent = selectedMeteoroid ? selectedMeteoroid[8] : "";
+    document.getElementById("year").textContent = selectedMeteoroid ? selectedMeteoroid[14] : "";
+    document.getElementById("mass").textContent = selectedMeteoroid ? selectedMeteoroid[12] : "";
+    document.getElementById("type").textContent = selectedMeteoroid ? selectedMeteoroid[11] : "";
   });
 
-  // Call createBarChart with valid data
   createBarChart(validData);
 });
 
@@ -202,7 +178,7 @@ function createBarChart(data) {
 
 
   ShootingStar = function (id) {
-    this.n = 0;
+    this.n = 0;s
     this.m = 0;
     this.defaultOptions = {
       velocity: 8,
