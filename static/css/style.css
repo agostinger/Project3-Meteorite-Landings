@@ -1,87 +1,81 @@
+/* Base Styles */
 body {
   font-family: 'Raleway', sans-serif;
-  background-color: #f3f4f6;
-  color: #333;
-  line-height: 1.6;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  background-color: #1f2f38;
+  color: #f1f1f1;
+  margin: 0;
   overflow-x: hidden;
 }
 
-header, footer {
-  background-color: #1b263b;
-  color: #f1c40f;
-  padding: 20px 0;
-  text-align: center;
-  transition: background-color 0.3s;
-}
-
-header:hover, footer:hover {
-  background-color: #34495e;
-}
-
-h1, h2, h4 {
-  font-weight: 600;
-  margin-top: 0;
-}
-
-#map-container {
-  height: 400px;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.3s ease-in-out;
-}
-
-#map-container:hover {
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.25);
-}
-
-select, #details {
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  transition: box-shadow 0.3s ease;
-}
-
-select:focus, #details:focus {
-  outline: none;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-}
-
-#details {
-  background-color: #fff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-top: 20px;
-}
-
-#details h4 {
-  border-bottom: 2px solid #f1c40f;
-  padding-bottom: 10px;
-  margin-bottom: 15px;
-}
-
-footer a {
+a {
   color: #f1c40f;
   transition: color 0.3s ease;
-  padding: 0 5px;
 }
 
-footer a:hover {
+a:hover {
   text-decoration: none;
   color: #f39c12;
 }
 
-main.container {
-  flex: 1;
-  padding: 20px;
+h1, h2, h3, h4, h5, h6 {
+  color: #f1c40f;
+  font-weight: 700;
 }
 
-.animate-fadein {
+/* Header Styles */
+header {
+  background: #34495e;
+  color: #f1c40f;
+  padding: 20px 0;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+/* Main Content Styles */
+main.container {
+  padding: 20px;
   animation: fadeIn 2s;
 }
 
+#map-container {
+  height: 400px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #2c3e50;
+  transition: transform 0.3s ease-in-out;
+}
+
+select, #details {
+  border-radius: 8px;
+  background-color: #34495e;
+  transition: all 0.3s ease, transform 0.2s ease;
+  border: none;
+  color: #f1f1f1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+select:hover, #details:hover {
+  transform: translateY(-3px);
+}
+
+select:focus, #details:focus {
+  outline: none;
+}
+
+/* Footer Styles */
+footer {
+  background: #2c3e50;
+  color: #f1c40f;
+  padding: 15px 0;
+  text-align: center;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+/* Animations */
 @keyframes fadeIn {
   from {
       opacity: 0;

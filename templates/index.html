@@ -3,60 +3,81 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NASA Meteorite Data Visualization">
+    <meta property="og:title" content="NASA Meteorite Data Visualization">
+    <meta property="og:description" content="Visualizing NASA's meteorite landing data.">
+    <meta property="og:image" content="path_to_thumbnail.png">
+    <meta property="og:url" content="your_website_url">
+
+    <title>NASA Meteorite Data Visualization</title>
+
+    <!-- Styles and Fonts -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
     <style>
         body {
             font-family: 'Raleway', sans-serif;
-            background: linear-gradient(45deg, #e6e9f0, #e9d8a6);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            background-color: #1f2f38;
+            color: #f1f1f1;
             overflow-x: hidden;
         }
 
-        header, footer {
-            background: linear-gradient(45deg, #2c3e50, #34495e);
+        header {
+            background: #34495e;
             color: #f1c40f;
             padding: 20px 0;
             text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         #map-container {
             height: 400px;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            margin-top: 20px;
-            transition: box-shadow 0.3s ease-in-out;
-        }
-
-        #map-container:hover {
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            background-color: #2c3e50;
+            transition: transform 0.3s ease-in-out;
         }
 
         h1, h2, h4 {
-            color: #2a2a2a;
-            font-weight: 600;
+            color: #f1c40f;
+            font-weight: 700;
+            margin-bottom: 1rem;
         }
 
         select, #details {
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            background-color: #34495e;
+            transition: all 0.3s ease, transform 0.2s ease;
             border: none;
+            color: #f1f1f1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        select:hover, #details:hover {
+            transform: translateY(-3px);
         }
 
         select:focus, #details:focus {
             outline: none;
         }
 
+        footer {
+            background: #2c3e50;
+            color: #f1c40f;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
         footer a {
             transition: color 0.3s ease;
             color: #f1c40f;
+            font-weight: 700;
         }
 
         footer a:hover {
@@ -65,11 +86,7 @@
         }
 
         main.container {
-            flex: 1;
             padding: 20px;
-        }
-
-        .animate-fadein {
             animation: fadeIn 2s;
         }
 
@@ -85,20 +102,19 @@
 </head>
 
 <body>
-
-    <header class="animate-fadein">
+    <header role="banner" class="animate__animated animate__fadeInDown">
         <h2>🌠 NASA Meteorite Data 🌠</h2>
     </header>
 
-    <main class="container mt-5 animate-fadein">
+    <main role="main" class="container mt-5 animate__animated animate__fadeIn">
         <h1 class="text-center mb-5">Meteorite Landing Visualizations</h1>
         <section class="row mt-4">
-            <article class="col-lg-8">
-                <div id="map-container"></div>
+            <article role="article" class="col-lg-8">
+                <div id="map-container" aria-label="Meteorite landing map"></div>
             </article>
-            <aside class="col-lg-4">
+            <aside role="complementary" class="col-lg-4">
                 <h4>Select a Meteorite</h4>
-                <select id="meteoroidSelect" class="form-control mb-4">
+                <select id="meteoroidSelect" class="form-control mb-4" aria-label="Select a meteorite from the list">
                     <option value="">-- Select Meteorite --</option>
                 </select>
                 <div id="details" class="p-4">
@@ -111,17 +127,18 @@
             </aside>
         </section>
         <section class="row mt-5">
-            <article class="col-lg-12">
+            <article role="article" class="col-lg-12">
                 <h4>Top 10 Meteoroids by Mass</h4>
-                <div id="bar" class="mt-3"></div>
+                <div id="bar" aria-label="Bar chart of top 10 meteoroids by mass" class="mt-3"></div>
             </article>
         </section>
     </main>
 
-    <footer class="animate-fadein">
-        <p>Created by University of Denver Data Analysis Students: <a href="https://github.com/agostinger">Adam Gostinger</a>, <a href="https://github.com/jgurbb38">Jennifer Grubb</a>, & <a href="https://github.com/Ryguy57">Ryan Himes</a> © 2023 Meteoroid Visualization. All Rights Reserved.</p>
+    <footer role="contentinfo" class="animate__animated animate__fadeInUp">
+        <p>Created by University of Denver Data Analysis Students: <a href="https://github.com/agostinger">Adam Gostinger</a>, <a href="https://github.com/jgurbb38">Jennifer Grubb</a>, & <a href="https://github.com/Ryguy57">Ryan Himes</a> © 2023 Meteorite Landing Visualizations. All Rights Reserved.</p>
     </footer>
 
+    <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
