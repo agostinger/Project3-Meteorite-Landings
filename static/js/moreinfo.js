@@ -52,9 +52,9 @@ d3.json(link).then((data) => {
   };
 
   const layoutTotalMass = {
-    title: 'Top 10 Meteorite Mass by Type',
+    title: 'Top 10 Class Types by Overall Meteorite Mass',
     xaxis: {
-      title: 'Meteorite Type',
+      title: 'Meteorite Class Type',
       showticklabels: false,
       showgrid: false,
     },
@@ -79,14 +79,14 @@ d3.json(link).then((data) => {
   };
 
   const layoutCount = {
-    title: 'Top 10 Meteorite Count by Type',
+    title: 'Top 10 Class Types by Number of Meteorite Landings',
     xaxis: {
       title: 'Meteorite Type',
       showticklabels: false,
       showgrid: false,
     },
     yaxis: {
-      title: 'Count',
+      title: 'Meteorite Landings Count',
       showgrid: false,
     },
   };

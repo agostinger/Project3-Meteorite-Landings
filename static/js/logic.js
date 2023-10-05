@@ -1,6 +1,6 @@
 const link = "https://data.nasa.gov/api/views/gh4g-9sfh/rows.json?accessType=DOWNLOAD";
 
-const setSize = mass => mass / 500;
+const setSize = mass => Math.sqrt(mass)*30;
 
 const colorScale = d3.scaleOrdinal()
   .domain(["1800-1900", "1901-2000", "2001-2100"])
