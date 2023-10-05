@@ -3,14 +3,17 @@ const link = "https://data.nasa.gov/api/views/gh4g-9sfh/rows.json?accessType=DOW
 
 d3.json(link).then((data) => {
   console.log(data);
+
   // Filter out data points with null latitude or longitude
   let validData = data.data;
 
   // Step 2: Group data by "recclass" and calculate the sum of "mass_g" and count
   const groupedData = {};
   validData.forEach(item => {
-    let recclass = item[11]; // "recclass" field is at index 10
-    let mass = parseFloat(item[12]) || 0; // "mass_g" field is at index 11
+    // recclass field is at index 10
+    let recclass = item[11];
+    // mass field is at index 11
+    let mass = parseFloat(item[12]) || 0;
 
     if (!groupedData[recclass]) {
       groupedData[recclass] = {
@@ -27,16 +30,16 @@ d3.json(link).then((data) => {
   // Convert grouped data to an array
   const bubbleData = Object.values(groupedData);
 
-  // Step 3: Sort the data and limit to the top 10 entries for both charts
+  // Sort the data and limit to the top 10 entries for both charts and sort in decending order for top 10
   const top10TotalMass = bubbleData
-    .sort((a, b) => b.totalMass - a.totalMass) // Sort by total mass in descending order
-    .slice(0, 10); // Take the top 10 entries
-
+    .sort((a, b) => b.totalMass - a.totalMass)
+    .slice(0, 10);
+// Sort by count in descending order for the top 10
   const top10Count = bubbleData
-    .sort((a, b) => b.count - a.count) // Sort by count in descending order
-    .slice(0, 10); // Take the top 10 entries
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 10);
 
-  // Create the "Total Mass" bubble chart
+  // Create the Total Mass bubble chart
   const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
   const traceTotalMass = {
@@ -65,7 +68,7 @@ d3.json(link).then((data) => {
     },
   };
 
-  // Create the "Count by Type" bubble chart
+  // Create the Count by Type bubble chart
   const traceCount = {
     x: top10Count.map(item => item.recclass),
     y: top10Count.map(item => item.count),
@@ -96,11 +99,11 @@ d3.json(link).then((data) => {
   Plotly.newPlot('bubbleCount', [traceCount], layoutCount);
 
 
-// Step 2: Group data by year and calculate the count of meteorites
+//Group data by year and calculate the count of meteorites
 const groupedDataByYear = {};
 validData.forEach(item => {
   // Change this line to correctly extract the year from the date field
-  let date = new Date(item[14]); // Assuming the date is at index 14
+  let date = new Date(item[14]);
   let year = date.getFullYear();
 
   if (!groupedDataByYear[year]) {
@@ -116,21 +119,22 @@ validData.forEach(item => {
 // Convert grouped data to an array
 const bubbleDataByYear = Object.values(groupedDataByYear);
 
-// Step 3: Sort the data by count in descending order
+//Sort the data by count in descending order
 bubbleDataByYear.sort((a, b) => b.count - a.count);
 
-// Step 4: Select the 10th largest count
+//Select the 10th largest count
 const tenthLargestCountData = bubbleDataByYear.slice(0, 10);
 
-// Create a Chart.js chart for the count by year
-const ctx = document.getElementById('countByYearChart').getContext('2d');
+// Use the Chart.js library that was not covered in class to create chart for the count by year
+  const ctx = document.getElementById('countByYearChart').getContext('2d');
 
+// Formatting
 const countByYearData = {
   labels: tenthLargestCountData.map(item => item.year),
   datasets: [{
     label: 'Count',
     data: tenthLargestCountData.map(item => item.count),
-    backgroundColor: tenthLargestCountData.map(item => colorScale(item.year)), // Use colorScale for different colors
+    backgroundColor: tenthLargestCountData.map(item => colorScale(item.year)),
     borderColor: 'rgba(0, 0, 0, 0.2)',
     borderWidth: 1,
   }],
@@ -138,33 +142,33 @@ const countByYearData = {
 
 const countByYearOptions = {
   responsive: true,
-  maintainAspectRatio: true, // Set to true for responsiveness
-  aspectRatio: 2, // Adjust the aspect ratio as needed
+  maintainAspectRatio: true,
+  aspectRatio: 2,
   scales: {
     x: {
       title: {
-        display: true, // Display the title
-        text: 'Year', // Title text
+        display: true,
+        text: 'Year',
         font: {
-          size: 14, // Adjust the font size as needed
-          weight: 'bold', // Font weight (e.g., 'bold' for bold)
+          size: 14,
+          weight: 'bold',
         },
       },
     },
     y: {
       title: {
-        display: true, // Display the title
-        text: 'Count', // Title text
+        display: true,
+        text: 'Count',
         font: {
-          size: 14, // Adjust the font size as needed
-          weight: 'bold', // Font weight (e.g., 'bold' for bold)
+          size: 14,
+          weight: 'bold',
         },
       },
     },
   },
 };
 new Chart(ctx, {
-  type: 'bar', // Use 'bar' type for a bar chart
+  type: 'bar',
   data: countByYearData,
 });
 });

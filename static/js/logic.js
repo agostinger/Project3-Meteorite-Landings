@@ -1,11 +1,16 @@
+// URL for NASA's dataset
 const link = "https://data.nasa.gov/api/views/gh4g-9sfh/rows.json?accessType=DOWNLOAD";
 
-const setSize = mass => Math.sqrt(mass)*30;
+// Function to compute size based on mass
+const setSize = mass => Math.sqrt(mass) * 30;
 
+
+// Initialize a color scale based on year ranges
 const colorScale = d3.scaleOrdinal()
   .domain(["1800-1900", "1901-2000", "2001-2100"])
   .range(["#ff0000", "#00ff00", "#0000ff"]);
 
+  // Function to determine which year range a given year falls into
 const getYearRange = year => {
   if (year >= 1800 && year <= 1900) return "1800-1900";
   if (year >= 1901 && year <= 2000) return "1901-2000";
@@ -13,23 +18,28 @@ const getYearRange = year => {
   return "Unknown";
 };
 
+// Function to create a marker for a given meteoroid feature
 const createMarker = feature => {
   const latitude = parseFloat(feature[15]);
   const longitude = parseFloat(feature[16]);
 
+// Check for valid latitude and longitude
   if (isNaN(latitude) || isNaN(longitude)) {
     console.error("Invalid latitude or longitude:", feature[15], feature[16]);
     return null;
   }
 
+// Extract year from the feature
   const date = new Date(feature[14]);
   const year = date.getFullYear();
   const yearRange = getYearRange(year);
   const fillColor = colorScale(yearRange);
 
+   // Extract additional meteoroid details
   const name = feature[8];
   const mass = feature[12];
 
+  // Create and return a Leaflet circle marker with a popup for the feature
   return L.circle([latitude, longitude], {
     color: "black",
     fillColor: fillColor,
@@ -40,16 +50,20 @@ const createMarker = feature => {
   }).bindPopup(`<strong>Name: </strong> ${name}<br><strong>Mass: </strong> ${mass} grams<br><strong>Year: </strong> ${year}`);
 };
 
+// Fetch the data and process it
 d3.json(link).then(data => {
+  // Filter out data with invalid latitude or longitude
   const validData = data.data.filter(feature => {
     const latitude = parseFloat(feature[15]);
     const longitude = parseFloat(feature[16]);
     return !isNaN(latitude) && !isNaN(longitude);
   });
 
+// Create markers for each valid data feature
   const markers = validData.map(createMarker);
   createMap(markers);
 
+  // Populate the meteoroid select dropdown
   const meteoroidSelect = document.getElementById("meteoroidSelect");
   validData.forEach(feature => {
     const option = document.createElement("option");
@@ -58,6 +72,7 @@ d3.json(link).then(data => {
     meteoroidSelect.appendChild(option);
   });
 
+  // Update displayed details when the selected meteoroid changes
   meteoroidSelect.addEventListener("change", () => {
     const selectedMeteoroid = validData.find(feature => feature[8] === meteoroidSelect.value);
 
@@ -143,7 +158,7 @@ function createBarChart(data) {
             type: "bar",
             orientation: "h",
             marker: {
-                color: "rgb(255, 165, 0)", // Bar fill color
+                color: "rgb(255, 165, 0)",
             },
         },
     ];
