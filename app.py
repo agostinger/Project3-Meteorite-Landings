@@ -1,13 +1,14 @@
-from flask import Flask, render_template, jsonify
-import requests
+from flask import Flask, render_template
+
 app = Flask(__name__)
+
 @app.route('/')
-def index():
+def meteorite_map():
     return render_template('index.html')
-@app.route('/getdata')
-def get_data():
-    url = "https://data.nasa.gov/api/views/gh4g-9sfh/rows.json?accessType=DOWNLOAD"
-    response = requests.get(url)
-    return jsonify(response.json())
-if __name__ == '__main__':
+
+@app.route('/data')
+def meteorite_data():
+    return render_template('index2.html')
+
+if __name__ == "__main__":
     app.run(debug=True)
