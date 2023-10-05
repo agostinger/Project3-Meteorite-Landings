@@ -17,7 +17,7 @@ A comprehensive data set from the NASA Meteoritical Society containing informati
 ## Visualizations
 The visualizations include a map with markers plotting all meteorites in the dataset, a drop-down to allow the user to select a certain meteorite to display its details, a bar chart showing the ten largest meteorites, a bubble chart displaying the meteorites with the overall largest mass, the top ten types of meteorites with the greatest frequency and lastly, a bar chart displaying the top ten years with the most meteorite landings.  
 
-<img src="images/map.png" alt="map">  
+<img src="images/map.png" alt="map" class="center">  
 
 ## Summary
 The provided data set from NASA chronicles the journeys of 34,513 meteorites that have made contact with our planet, Earth! From intriguing names to the precise locations they touched down, this data set has it all. We've wrangled insights from these space travelers, especially focusing on those who have landed since the dawn of the 20th century. Notably, meteorites in the 'Iron' recclass signify the heavier category. Interestingly, 2003 was a particularly busy year for our skies; it saw a whopping 3,323 meteorites making their descent. But, here's a comforting tidbit: our visualizations reveal that massive meteorite landings weighing 1000+ grams are quite the rarity. More often than not, we're visited by lighter meteorites, like those from the L6, H5, and L5 categories.
