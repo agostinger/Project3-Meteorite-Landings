@@ -1,7 +1,7 @@
 # Project3-Meteorite-Landings
-Instructor:  Steven Greene
-Bootcamp:  DU-VIRT-DATA-PT-06-2023
-5th October 2023
+Instructor:  Steven Greene  
+Bootcamp:  DU-VIRT-DATA-PT-06-2023  
+5th October 2023  
 
 ## Table of Contents
 - [About](#about)
