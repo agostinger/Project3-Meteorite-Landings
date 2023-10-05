@@ -4,58 +4,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="images/favicon.ico" rel="icon" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <style>
         body {
             font-family: 'Raleway', sans-serif;
-            background-image: linear-gradient(to right top, #f4f4f4, #f6e7d9, #f7dac0, #f7cea4, #f6c38a);
+            background: linear-gradient(45deg, #e6e9f0, #e9d8a6);
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         header, footer {
-            background: linear-gradient(to right, #333, #666);
-            color: #ffffff;
+            background: linear-gradient(45deg, #2c3e50, #34495e);
+            color: #f1c40f;
             padding: 20px 0;
             text-align: center;
         }
 
         #map-container {
             height: 400px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             margin-top: 20px;
+            transition: box-shadow 0.3s ease-in-out;
         }
 
-        h1, h4 {
+        #map-container:hover {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        h1, h2, h4 {
             color: #2a2a2a;
+            font-weight: 600;
         }
 
         select, #details {
+            border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            border: none;
         }
 
-        select:hover, #details:hover {
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-            transform: translateY(-5px);
+        select:focus, #details:focus {
+            outline: none;
         }
 
-        #details p {
-            margin: 10px 0;
+        footer a {
+            transition: color 0.3s ease;
+            color: #f1c40f;
         }
 
         footer a:hover {
-            text-decoration: underline;
-            color: #FFD700;
+            text-decoration: none;
+            color: #f39c12;
         }
 
         main.container {
             flex: 1;
+            padding: 20px;
         }
 
         .animate-fadein {
@@ -79,36 +90,36 @@
         <h2>🌠 NASA Meteorite Data 🌠</h2>
     </header>
 
-    <main class="container mt-4 animate-fadein">
-        <h1 class="text-center">Meteorite Landing Visualizations</h1>
+    <main class="container mt-5 animate-fadein">
+        <h1 class="text-center mb-5">Meteorite Landing Visualizations</h1>
         <section class="row mt-4">
             <article class="col-lg-8">
                 <div id="map-container"></div>
             </article>
             <aside class="col-lg-4">
                 <h4>Select a Meteorite</h4>
-                <select id="meteoroidSelect" class="form-control mb-3">
+                <select id="meteoroidSelect" class="form-control mb-4">
                     <option value="">-- Select Meteorite --</option>
                 </select>
-                    <div id="details" class="p-3">
-                        <h4>Details</h4>
-                        <p><strong>Name: </strong> <span id="name"></span></p>
-                        <p><strong>Year: </strong> <span id="year"></span></p>
-                        <p><strong>Mass: </strong> <span id="mass"></span></p>
-                        <p><strong>Type: </strong> <span id="type"></span></p>
+                <div id="details" class="p-4">
+                    <h4>Details</h4>
+                    <p><strong>Name: </strong> <span id="name"></span></p>
+                    <p><strong>Year: </strong> <span id="year"></span></p>
+                    <p><strong>Mass: </strong> <span id="mass"></span></p>
+                    <p><strong>Type: </strong> <span id="type"></span></p>
                 </div>
             </aside>
         </section>
-        <section class="row mt-4">
+        <section class="row mt-5">
             <article class="col-lg-12">
                 <h4>Top 10 Meteoroids by Mass</h4>
-                <div id="bar"></div>
+                <div id="bar" class="mt-3"></div>
             </article>
         </section>
     </main>
 
     <footer class="animate-fadein">
-        <p>Created by University of Denver Data Analysis Students: <a href="https://github.com/agostinger">Adam Gostinger</a>, <a href="https://github.com/jgurbb38">Jennifer Grubb</a>, & <a href="https://github.com/Ryguy57">Ryan Himes</a>© 2023 Meteoroid Visualization. All Rights Reserved.</p>
+        <p>Created by University of Denver Data Analysis Students: <a href="https://github.com/agostinger">Adam Gostinger</a>, <a href="https://github.com/jgurbb38">Jennifer Grubb</a>, & <a href="https://github.com/Ryguy57">Ryan Himes</a> © 2023 Meteoroid Visualization. All Rights Reserved.</p>
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -117,8 +128,6 @@
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script type="text/javascript" src="static/js/logic.js"></script>
-
-
 </body>
 
 </html>
