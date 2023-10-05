@@ -25,7 +25,11 @@ The visualizations include a map with markers plotting all meteorites in the dat
 </p>  
 
 ## Summary
-The provided data set from NASA chronicles the journeys of 34,513 meteorites that have made contact with our planet, Earth! From intriguing names to the precise locations they touched down, this data set has it all. We've wrangled insights from these space travelers, especially focusing on those who have landed since the dawn of the 20th century. Notably, meteorites in the 'Iron' recclass signify the heavier category. Interestingly, 2003 was a particularly busy year for our skies; it saw a whopping 3,323 meteorites making their descent. But, here's a comforting tidbit: our visualizations reveal that massive meteorite landings weighing 1000+ grams are quite the rarity. More often than not, we're visited by lighter meteorites, like those from the L6, H5, and L5 categories.
+The provided data set from NASA chronicles the journeys of 34,513 meteorites that have made contact with our planet, Earth! From intriguing names to the precise locations they touched down, this data set has it all. We've wrangled insights from these space travelers, especially focusing on those who have landed since the dawn of the 20th century. Notably, meteorites in the 'Iron' reclass signify the heavier category. Interestingly, 2003 was a particularly busy year for our skies; it saw a whopping 3,323 meteorites making their descent. But, here's a comforting tidbit: our visualizations reveal that massive meteorite landings weighing 1000+ grams are quite the rarity. More often than not, we're visited by lighter meteorites, like those from the L6, H5, and L5 categories.
+
+<p align="center">
+<img src="classification/map.png" alt="classification">
+</p>  
 
 ## Conclusion
 After a comprehensive analysis and visualization of meteorite landings, it's evident that such landings are not as rare as one might think. In fact, there's been a surge over the past two decades. However, there's a silver lining: most of the landings are from the lightweight category. Interestingly, while you are reading this, a meteorite might land somewhere on Earth.
