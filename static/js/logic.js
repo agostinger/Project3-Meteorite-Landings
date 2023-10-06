@@ -120,14 +120,16 @@ function createLegend() {
   legend.onAdd = function (map) {
     const div = L.DomUtil.create('div', 'legend');
     const yearRanges = ["19th Century", "20th Century", "21st Century"];
+    const colors = ["#ff0000", "#00ff00", "#0000ff"];
 // Add a title to the legend
   div.innerHTML = '<h4>Meteorite Landed in:</h4>';
 
-    // Loop through the year ranges and add legend items
-    for (const yearRange of yearRanges) {
-      const color = colorScale(yearRange); // Get the color for the year range
-      div.innerHTML += `<i style="background:${color}"></i> ${yearRange}<br>`;
-    }
+// Loop through the year ranges and add legend items
+for (let i = 0; i < yearRanges.length; i++) {
+  const color = colors[i]; // Get the color for the year range
+  const yearRange = yearRanges[i];
+  div.innerHTML += `<i style="background:${color}"></i> ${yearRange}<br>`;
+}
     // Add the note about circle size
     div.innerHTML += '<p>Circle size represents<br>meteorite mass (grams)</p>';
 
