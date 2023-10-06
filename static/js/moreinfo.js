@@ -3,16 +3,14 @@ const link = "https://data.nasa.gov/api/views/gh4g-9sfh/rows.json?accessType=DOW
 
 d3.json(link).then((data) => {
   console.log(data);
-
-  // Filter out data points with null latitude or longitude
   let validData = data.data;
 
-  // Step 2: Group data by "recclass" and calculate the sum of "mass_g" and count
+  // Group data by class type and calculate the sum of the mass and count of meteroites
   const groupedData = {};
   validData.forEach(item => {
-    // recclass field is at index 10
+    // recclass field is at index 11
     let recclass = item[11];
-    // mass field is at index 11
+    // mass field is at index 12
     let mass = parseFloat(item[12]) || 0;
 
     if (!groupedData[recclass]) {
